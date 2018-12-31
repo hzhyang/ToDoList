@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { observer } from "mobx-react";
 
-class Contents extends Component{
+@observer export default class Contents extends Component{
 	render() {
 		return (
 			<div>
@@ -10,5 +10,3 @@ class Contents extends Component{
 		);
 	}
 }
-
-export default observer(Contents);
