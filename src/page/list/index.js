@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { observer } from "mobx-react";
 import { Table } from 'antd';
 
-import Store from '../../stores/list'
+import Store from '../../stores/list';
+import './index.less';
 
 @observer export default class List extends Component {
 	constructor(props) {
@@ -15,8 +16,9 @@ import Store from '../../stores/list'
 				columns
 		} = this.Store.tableprops;
 		return (
-				<div>
+				<div className="List-wrap">
 					<Table
+						bordered={true}
 						columns={columns}
 						dataSource={dataSource}
 					/>

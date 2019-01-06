@@ -15,16 +15,22 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader'
-        }
+          loader: 'babel-loader',
+          options: {
+            plugins: [ // babel-plugin-import antd 按需引入
+              ['import', { libraryName: 'antd', style: 'css' }]  // `style: true` 会加载 less 文件
+            ]
+        }}
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        use: ['style-loader', 'css-loader'],
+        // exclude: /node_modules/
       },
       {
         test: /\.less$/,
-        use: ['style-loader', 'css-loader', 'less-loader']
+        use: ['style-loader', 'css-loader', 'less-loader'],
+        exclude: /node_modules/
       }
     ]
   },

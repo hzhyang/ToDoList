@@ -12,7 +12,8 @@ import Error from './error/index';
 			<Router>
 				<Switch>
 					<Route path="/list" component={List} />
-					<Route path="/create" component={Create}/>
+					<Route path="/create" component={Create} />
+					<Route path="/*" component={Error} />
 				</Switch>
 			</Router>
 		)
