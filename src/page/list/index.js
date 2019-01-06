@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { observer } from "mobx-react";
-import { Table } from 'antd';
+import { Link } from "react-router-dom";
+import { Table, Button } from 'antd';
 
 import Store from '../../stores/list';
 import './index.less';
@@ -13,7 +14,8 @@ import './index.less';
 	render() {
 		const {
 			dataSource,
-				columns
+				columns,
+				modalProps
 		} = this.Store.tableprops;
 		return (
 				<div className="List-wrap">
@@ -22,6 +24,13 @@ import './index.less';
 						columns={columns}
 						dataSource={dataSource}
 					/>
+					<div className="addButton-wrap">
+						<Button type="primary">
+							<Link to="create">
+								<i className="iconfont icon-tianjia1" />
+							</Link>
+						</Button>
+					</div>
 				</div>
 		)
 	}

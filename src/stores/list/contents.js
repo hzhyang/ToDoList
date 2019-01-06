@@ -3,11 +3,13 @@ export default {
 		columns:[
 			{
 				dataIndex: 'todoname',
-				title: '事件名称'
+				title: '事件名称',
+				width:250
 			},
 			{
 				dataIndex: 'todocreatetime',
-				title: '事件创建时间'
+				title: '事件创建时间',
+				width: 150
 			}
 		],
 		dataSource:[

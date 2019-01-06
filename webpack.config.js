@@ -31,6 +31,10 @@ module.exports = {
         test: /\.less$/,
         use: ['style-loader', 'css-loader', 'less-loader'],
         exclude: /node_modules/
+      },
+      {
+        test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/,
+        use:['url-loader']
       }
     ]
   },
