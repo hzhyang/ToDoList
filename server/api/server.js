@@ -8,11 +8,12 @@ app.use(bodyparser.json());
 app.all("*", function (req, res, next) {
 	res.header('Access-Control-Allow-Origin', '*');
 	res.header('Access-Control-Allow-Headers', 'content-type')
+	next();
 });
 
 app.get("/todolist",router.todolist);
 
 
-app.listen(80,'0.0.0.0', function () {
+app.listen(80, function () {
 	console.log("start server success")
 })
