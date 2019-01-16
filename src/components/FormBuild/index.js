@@ -7,6 +7,10 @@ class FormBuild extends Component{
 	}
 
 	renderInner = (type,item) => {
+		if (item.innerConfig.value) {
+			item.innerConfig.initialvalue = item.innerConfig.value;
+		}
+		delete item.innerConfig.value;
 		const rendertype = `render${type}`;
 		return this[rendertype](item);
 	};
@@ -29,7 +33,7 @@ class FormBuild extends Component{
 
 	renderSelect = (item) => {
 			return (
-				<Select {...item.selectConfig}>
+				<Select {...item.innerConfig}>
 					{
 						item.options.map((item,index) => (
 							<Select.Option key={index} value={item.value}>{item.label}</Select.Option>
@@ -41,6 +45,7 @@ class FormBuild extends Component{
 
 	render() {
 		const { formProps } = this.props;
+		console.log(formProps)
 		const items = formProps.items;
 		const { getFieldDecorator } = this.props.form;
 		return (
@@ -59,4 +64,14 @@ class FormBuild extends Component{
 	}
 }
 
-export default Form.create()(FormBuild);
+export default Form.create({
+	onValuesChange(props, fields, valueMap) {
+		const name = Object.keys(fields)[0];
+		const value = fields[name];
+		const fieldData = {
+			name,
+			value
+		}
+		props.formProps.onFieldsChange && props.formProps.onFieldsChange(fieldData, props, valueMap);
+	}
+})(FormBuild);

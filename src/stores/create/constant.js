@@ -1,5 +1,6 @@
 export default {
 	formProps: {
+		onFieldsChange: null,
 		formLayout: {
 			labelCol: {
 				span:10
@@ -15,11 +16,8 @@ export default {
 				config: {
 					label: '代办名称',
 				},
-				// itemLayout: {
-				// 	labelCol: { span: 2},
-				// 	wrapperCol: { span: 4}
-				// },
 				innerConfig: {
+					value: '',
 					placeholder: '请输入代办名称'
 				},
 				rules: [
@@ -32,7 +30,7 @@ export default {
 				config: {
 					label: '代办类型',
 				},
-				selectConfig: {},
+				innerConfig: {},
 				options: [
 					{
 						value: 'test',
@@ -46,12 +44,8 @@ export default {
 				config: {
 					label: '代办备注',
 				},
-				// itemLayout: {
-				// 	labelCol: { span: 2},
-				// 	wrapperCol: { span: 4}
-				// },
 				innerConfig: {
-					value: '请输入代办备注'
+					placeholder: '请输入代办备注'
 				}
 			}
 		]

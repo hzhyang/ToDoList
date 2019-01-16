@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { observer } from "mobx-react";
 import FormBuild from '@src/components/FormBuild';
-// import {Form, Input} from "antd";
 
 import Store from '@src/stores/create';
 
@@ -16,7 +15,7 @@ import Store from '@src/stores/create';
 		} = this.Store;
 		return (
 			<div>
-			<FormBuild formProps={JSON.parse(JSON.stringify(formProps))} />
+			<FormBuild formProps={formProps} />
 			</div>
 		);
 	}
