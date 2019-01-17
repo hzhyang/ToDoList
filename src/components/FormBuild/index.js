@@ -1,10 +1,20 @@
 import React, { Component } from 'react';
-import {Form, Input, Select,} from 'antd';
+import {Form, Input, Select, Button } from 'antd';
+import { Link } from 'react-router-dom';
 
 class FormBuild extends Component{
 	constructor(props) {
 		super(props);
+		console.log(222)
 	}
+
+	// this.props.form.validateFields((err) => {
+	// 	if (err) {
+	// 		item.iserror = false;
+	// 	} else {
+	// 	item.iserror = true;
+	// 	}
+	// })
 
 	renderInner = (type,item) => {
 		if (item.innerConfig.value) {
@@ -14,6 +24,22 @@ class FormBuild extends Component{
 		const rendertype = `render${type}`;
 		return this[rendertype](item);
 	};
+
+	renderButton = (item) => {
+		return (
+				<div className="button-wrap">
+					<Button {...item.innerConfig}>{item.innerConfig.label}</Button>
+					{
+						item.iscance ? (
+						<Button disabled={item.innerConfig.disabled}>
+							<Link to={item.canceRoute}>取消</Link>
+						</Button>
+						): null
+					}
+				</div>
+
+		)
+	}
 
 	renderInput = (item) => {
 		return (
@@ -27,9 +53,6 @@ class FormBuild extends Component{
 		)
 	}
 
-	renderButtion = () => {
-
-	}
 
 	renderSelect = (item) => {
 			return (
@@ -45,7 +68,6 @@ class FormBuild extends Component{
 
 	render() {
 		const { formProps } = this.props;
-		console.log(formProps)
 		const items = formProps.items;
 		const { getFieldDecorator } = this.props.form;
 		return (

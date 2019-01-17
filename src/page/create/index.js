@@ -3,6 +3,7 @@ import { observer } from "mobx-react";
 import FormBuild from '@src/components/FormBuild';
 
 import Store from '@src/stores/create';
+import './index.less';
 
 @observer export default class Contents extends Component{
 	constructor() {
@@ -14,8 +15,8 @@ import Store from '@src/stores/create';
 			formProps
 		} = this.Store;
 		return (
-			<div>
-			<FormBuild formProps={formProps} />
+			<div className="form-wrap">
+				<FormBuild formProps={formProps} />
 			</div>
 		);
 	}

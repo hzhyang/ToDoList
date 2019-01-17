@@ -3,7 +3,7 @@ export default {
 		onFieldsChange: null,
 		formLayout: {
 			labelCol: {
-				span:10
+				span:2
 			},
 			wrapperCol: {
 				span: 4
@@ -47,8 +47,22 @@ export default {
 				innerConfig: {
 					placeholder: '请输入代办备注'
 				}
-			}
+			},
+			{
+				name: 'todo_submit',
+				type: 'Button',
+				issubmit: true,
+				iscance: true,
+				canceRoute: '',
+				config: {
+					label: ''
+				},
+				innerConfig: {
+					label: '提交',
+					type: 'primary',
+					disabled: false
+				}
+			},
 		]
 	}
-
 }
