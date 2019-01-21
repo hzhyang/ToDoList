@@ -6,3 +6,7 @@
     content,
     remask
   }
+  respon {
+    ok:1 
+    msg: '添加成功'
+  }

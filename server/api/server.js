@@ -12,7 +12,7 @@ app.all("*", function (req, res, next) {
 });
 
 app.get("/todolist",router.todolist);
-app.get("/createlist",router.createlist);
+app.post("/createlist",router.createlist);
 
 
 app.listen(80, function () {

@@ -1,5 +1,7 @@
 import { observable, action, toJS } from 'mobx';
+import axios from 'axios';
 
+import common  from '@src/utils/common';
 import CONSTANT from './constant';
 class Store {
 	constructor() {
@@ -39,6 +41,11 @@ class Store {
 			}
 		})
 		console.log(data)
+		// console.log(baseurl)
+		const { baseurl } = common;
+		axios.post(baseurl+'/createlist',data).then(({resp}) => {
+			console.log(resp)
+		})
 	}
 
 }
