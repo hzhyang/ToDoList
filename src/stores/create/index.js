@@ -43,8 +43,11 @@ class Store {
 		console.log(data)
 		// console.log(baseurl)
 		const { baseurl } = common;
-		axios.post(baseurl+'/createlist',data).then(({resp}) => {
-			console.log(resp)
+		axios.post(baseurl+'/createlist',data).then(({ data }) => {
+			console.log(data)
+			if (data.ok) {
+				// this.props.
+			}
 		})
 	}
 

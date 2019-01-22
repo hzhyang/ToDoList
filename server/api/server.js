@@ -13,6 +13,7 @@ app.all("*", function (req, res, next) {
 
 app.get("/todolist",router.todolist);
 app.post("/createlist",router.createlist);
+app.get("/fetchtabledata",router.fetchtabledata);
 
 
 app.listen(80, function () {

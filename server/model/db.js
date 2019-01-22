@@ -18,3 +18,13 @@ module.exports.insertOne = function ( collect,contentobj,cb) {
     mydb.collection(collect).insertOne(contentobj,cb)
   })
 };
+
+module.exports.find = function (collect, obj, cb) {
+  _connect(function (mydb){
+    obj.where = obj.where ? obj.where : {};
+    obj.sort = obj.sort ? obj.sort : {};
+    obj.limit = obj.limit ? obj.limit : 0;
+    obj.skip = obj.skip ? obj.skip : 0;
+    mydb.collection(collect).find(obj.where).sort(obj.sort).limit(obj.limit).skip(obj.skip).toArray(cb);
+  })
+}

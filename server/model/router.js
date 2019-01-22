@@ -7,13 +7,28 @@ module.exports.todolist = function (req, res) {
 		test: 'hello'
 	})
 }
-module.exports.createlist = function (req, res) {
+module.exports.createlist = function (req, res) { // 添加
 	console.log(req.body);
-	db.insertOne('todo',req.body,function(err, results) {
+	const time = Date.now();
+	const data = Object.assign({createdate: time},req.body)
+	db.insertOne('todo',data,function(err, results) {
 		if (err) {
 			help.respon(res);
 		} else {
 			help.respon(res,1, '添加成功')
+		}
+	})
+}
+
+module.exports.fetchtabledata = function (req, res) {
+	console.log(req.query);
+	db.find('todo', {sort: { createdate: -1}},function(err,resp) {
+		if (err) {
+			console.log(err)
+			help.respon(res);
+		} else {
+			console.log(resp)
+			help.respon(res,1,resp)
 		}
 	})
 }
