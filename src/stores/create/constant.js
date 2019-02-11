@@ -33,8 +33,20 @@ export default {
 				innerConfig: {},
 				options: [
 					{
-						value: 'test',
-						label: 'test'
+						value: 'important',
+						label: '重要的'
+					},
+					{
+						value: 'urgent',
+						label: '紧急的'
+					},
+					{
+						value: 'importanturgent',
+						label: '紧急且重要的'
+					},
+					{
+						value: 'general',
+						label: '一般的'
 					}
 				]
 			},

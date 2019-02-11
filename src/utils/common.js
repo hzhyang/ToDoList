@@ -1,4 +1,4 @@
-// import  from 'react-router-dom';
+import history from '@src/router/history';
 
 export default {
 	baseurl: 'http://127.0.0.1',
@@ -9,5 +9,11 @@ export default {
 		const day = date.getDate();
 		const datastr = ms ? `${year}-${month}-${day}` : '';
 		return datastr;
+	},
+	pageGoto: (router) => {
+		console.log(history)
+		history.push({
+			pathname: router
+		})
 	}
 }

@@ -26,7 +26,29 @@ export default {
 			{
 				dataIndex: 'todo_type',
 				title: '事件类型',
-				width: 150
+				width: 150,
+				render: (text) => {
+					let tmptext = '';
+					switch (text) {
+						case 'important':
+							tmptext = '重要';
+							break;
+						case 'urgent':
+							tmptext = '紧急';
+							break;
+						case 'importanturgent':
+							tmptext = '重要紧急';
+							break;
+						case 'general':
+							tmptext = '一般';
+							break;
+						default :
+							return null
+					}
+					return (
+							<span>{ tmptext }</span>
+					)
+				}
 			},
 			{
 				dataIndex: 'todo_remarks',
