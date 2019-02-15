@@ -43,7 +43,6 @@ class Store {
 		let flag = true;
 		for (var item in data) {
 			if (item == 'todo_name') {
-				console.log(111)
 				if (data[item] == undefined || !data[item]) {
 					message.error('事件名称不能为空');
 					flag = false;

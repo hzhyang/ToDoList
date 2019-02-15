@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 class FormBuild extends Component{
 	constructor(props) {
 		super(props);
-		console.log(222)
 	}
 
 	// this.props.form.validateFields((err) => {
