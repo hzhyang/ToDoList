@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const UglifyJsPlugin=require('uglifyjs-webpack-plugin');
 
 module.exports = {
   mode: 'development', // 开发环境
@@ -45,6 +46,16 @@ module.exports = {
       template: './public/index.html'
     })
   ],
+  //压缩js
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        uglifyOptions: {
+          compress: false
+        }
+      })
+    ]
+  },
   resolve: { // 设置别名
     alias: {
       '@src': path.resolve(__dirname, 'src'),
