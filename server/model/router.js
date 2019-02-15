@@ -27,6 +27,7 @@ module.exports.createlist = function (req, res) { // 添加
 
 module.exports.fetchtabledata = function (req, res) {
 	console.log(req.query);
+
 	db.find('todo', {sort: { createdate: -1}},function(err,resp) {
 		if (err) {
 			console.log(err)

@@ -11,7 +11,6 @@ export default {
 		return datastr;
 	},
 	pageGoto: (router) => {
-		console.log(history)
 		history.push({
 			pathname: router
 		})

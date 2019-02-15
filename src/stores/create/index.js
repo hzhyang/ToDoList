@@ -40,7 +40,6 @@ class Store {
 				data[item.name] = item.innerConfig.initialvalue;
 			}
 		})
-		console.log(data,222)
 		let flag = true;
 		for (var item in data) {
 			if (item == 'todo_name') {
@@ -56,7 +55,6 @@ class Store {
 			// console.log(baseurl)
 			const { baseurl } = common;
 			axios.post(baseurl+'/createlist',data).then(({ data }) => {
-				console.log(data)
 				if (data.ok) {
 					common.pageGoto('/')
 				}

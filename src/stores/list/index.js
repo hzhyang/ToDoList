@@ -19,7 +19,6 @@ export default class Store {
 	 * */
 
 	@action init = () => {
-		console.log(common)
 		this.fetchTabledata();
 	}
 
@@ -27,7 +26,6 @@ export default class Store {
 		const { baseurl } = common;
 		axios.get(`${baseurl}/fetchtabledata`)
 				.then(({data}) => {
-					console.log(data);
 					const realdata = data.msg;
 					realdata.forEach(item => {
 						item.key = item._id
@@ -36,7 +34,6 @@ export default class Store {
 
 				})
 				.catch(err => {
-					console.log(err);
 				})
 	}
 }
