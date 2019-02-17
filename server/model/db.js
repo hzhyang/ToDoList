@@ -13,6 +13,15 @@ function _connect(cb) {
   })
 };
 
+module.exports.count = function (collect,obj,cb,) {
+  var where={};
+  if(obj){
+      where=obj
+  }
+  _connect(function (mydb) {
+    mydb.collection(collect).countDocuments(where).then(cb);
+  })
+};
 module.exports.insertOne = function ( collect,contentobj,cb) {
   _connect(function(mydb){
     mydb.collection(collect).insertOne(contentobj,cb)

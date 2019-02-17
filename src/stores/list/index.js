@@ -1,17 +1,17 @@
-import { observable, action } from "mobx";
-import axios from 'axios';
+import React from 'react';
+import {observable, action} from "mobx";
 import CONTENTS from './contents';
-import common from '@src/utils/common';
+import ajax from '@src/utils/ajax';
 
 export default class Store {
-	constructor(){
+	constructor() {
 		this.init();
 	}
 
 	/**
 	 * @props
-	* */
-	@observable tableprops = CONTENTS.tableprops
+	 * */
+	@observable tableprops = CONTENTS.tableprops;
 
 
 	/**
@@ -20,20 +20,65 @@ export default class Store {
 
 	@action init = () => {
 		this.fetchTabledata();
+		this.tableprops.rowSelection.onChange = this.selectionChange;
+		this.tableprops.pagination.onChange = this.pageChange;
+		this.tableprops.columns.forEach(item => {
+			if (item.key == 'operate') {
+				item.render = (record) => {
+					return(
+							<a onClick={() => this.tabeldel(record)}>删除</a>
+					)
+				}
+			}
+		})
 	}
 
-	@action fetchTabledata = () => {
-		const { baseurl } = common;
-		axios.get(`${baseurl}/fetchtabledata`)
-				.then(({data}) => {
-					const realdata = data.msg;
-					realdata.forEach(item => {
-						item.key = item._id
-					})
-					this.tableprops.dataSource = realdata;
+	@action fetchTabledata = (page = 1,pageSize = 10) => {
 
-				})
-				.catch(err => {
-				})
+		const searchdata = {
+			page,
+			pageSize
+		}
+		ajax({
+			type: 'get',
+			url: '/fetchtabledata',
+			data: searchdata
+		})
+		.then(({data}) => {
+			const realdata = data.data.data;
+			realdata.forEach(item => {
+				item.key = item._id
+			})
+			const total = data.data.total;
+			const pagination = {
+				total,
+				current: page
+			}
+			this.tableprops.dataSource = realdata;
+			this.tableprops.pagination = pagination
+
+		})
+		.catch(err => {
+		})
+	}
+
+	@action selectionChange = (selectedRowKeys) => {
+		console.log(selectedRowKeys)
+	}
+
+	@action pageChange = (page,pageSize) => {
+		this.fetchTabledata(page,pageSize)
+	}
+
+	@action tabeldel = (row) => {
+		// ajax({
+		// 	type: 'get',
+		// 	url: '/deltabledata',
+		// 	data: {
+		// 		_id: row._id
+		// 	}
+		// }).then(resp => {
+		// 	console.log(resp)
+		// })
 	}
 }

@@ -12,17 +12,11 @@ import './index.less';
 		this.Store = new Store;
 	}
 	render() {
-		const {
-			dataSource,
-				columns,
-				modalProps
-		} = this.Store.tableprops;
 		return (
 				<div className="List-wrap">
 					<Table
 						bordered={true}
-						columns={columns}
-						dataSource={dataSource}
+						{...this.Store.tableprops}
 					/>
 					<div className="addButton-wrap">
 						<Button type="primary">

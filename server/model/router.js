@@ -8,33 +8,39 @@ module.exports.todolist = function (req, res) {
 	})
 }
 module.exports.createlist = function (req, res) { // 添加
-	console.log(req.body,typeof req.body,2222);
 	if (Object.keys(req.body).length != 0) {
 		const time = Date.now();
-		const data = Object.assign({createdate: time},req.body)
+		const data = Object.assign({createdate: time},req.body, {isdone: f})
 		db.insertOne('todo',data,function(err, results) {
 			if (err) {
 				help.respon(res);
 			} else {
-				help.respon(res,1, '添加成功')
+				help.respon(res,1, {msg:'添加成功'})
 			}
 		})
 	} else {
-		help.respon(res,0,'参数错误')
+		help.respon(res,0,{msg: '参数错误'})
 	}
 
 }
 
 module.exports.fetchtabledata = function (req, res) {
 	console.log(req.query);
-
-	db.find('todo', {sort: { createdate: -1}},function(err,resp) {
+	const { page,pageSize } = req.query;
+	let total = 0;
+	const limit = pageSize * 1;
+	const skip = page == 1 ? 0 : (page-1) * pageSize;
+	db.count('todo',{},function(resp) {
+		console.log(resp);
+		total = resp
+	})
+	db.find('todo', {sort: { createdate: -1},limit,skip},function(err,resp) {
 		if (err) {
 			console.log(err)
 			help.respon(res);
 		} else {
 			console.log(resp)
-			help.respon(res,1,resp)
+			help.respon(res,1,{data:resp,total})
 		}
 	})
 }
