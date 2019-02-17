@@ -24,9 +24,9 @@ export default class Store {
 		this.tableprops.pagination.onChange = this.pageChange;
 		this.tableprops.columns.forEach(item => {
 			if (item.key == 'operate') {
-				item.render = (record) => {
+				item.render = (row) => {
 					return(
-							<a onClick={() => this.tabeldel(record)}>删除</a>
+							<a onClick={() => this.tabeldel(row)}>删除</a>
 					)
 				}
 			}
