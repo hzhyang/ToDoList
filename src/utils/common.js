@@ -1,8 +1,7 @@
 import history from '@src/router/history';
 
 export default {
-	// baseurl: 'http://www.ifelsefi.com:1888',
-	baseurl: 'http://127.0.0.1:8888',
+	baseurl: 'http://www.ifelsefi.com:1888',
 	gettime: (ms) => {
 		const date = new Date(ms);
 		const year = date.getFullYear();
