@@ -10,7 +10,7 @@ module.exports.todolist = function (req, res) {
 module.exports.createlist = function (req, res) { // 添加
 	if (Object.keys(req.body).length != 0) {
 		const time = Date.now();
-		const data = Object.assign({createdate: time},req.body, {isdone: f})
+		const data = Object.assign({createdate: time},req.body, {isdone: false})
 		db.insertOne('todo',data,function(err, results) {
 			if (err) {
 				help.respon(res);
