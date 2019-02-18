@@ -1,6 +1,6 @@
 import axios from 'axios';
 import common from "@src/utils/common";
-
+import qs from 'qs';
 
 function ajax(obj) {
 	const {baseurl} = common;
