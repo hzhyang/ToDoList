@@ -71,14 +71,17 @@ export default class Store {
 	}
 
 	@action tabeldel = (row) => {
-		// ajax({
-		// 	type: 'get',
-		// 	url: '/deltabledata',
-		// 	data: {
-		// 		_id: row._id
-		// 	}
-		// }).then(resp => {
-		// 	console.log(resp)
-		// })
+		ajax({
+			type: 'post',
+			url: '/deltabledata',
+			data: {
+				_id: row._id
+			}
+		}).then(resp => {
+			console.log(resp)
+			if(resp.data.ok == 1) {
+				this.fetchTabledata(this.tableprops.pagination.current)
+			}
+		})
 	}
 }

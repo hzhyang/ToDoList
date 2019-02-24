@@ -1,5 +1,6 @@
 const mongod  = require('mongodb');
 const help  = require('./help.js');
+const mongo = require('mongodb');
 var mongoClient = mongod.MongoClient;
 
 function _connect(cb) {
@@ -35,5 +36,13 @@ module.exports.find = function (collect, obj, cb) {
     obj.limit = obj.limit ? obj.limit : 0;
     obj.skip = obj.skip ? obj.skip : 0;
     mydb.collection(collect).find(obj.where).sort(obj.sort).limit(obj.limit).skip(obj.skip).toArray(cb);
+  })
+}
+
+module.exports.deltone = function (collect,id,cb) {
+  _connect(function (mydb) {
+    mydb.collection(collect).deleteOne({
+      _id: mongo.ObjectId(id)
+    },cb)
   })
 }

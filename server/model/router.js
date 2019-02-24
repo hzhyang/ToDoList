@@ -44,3 +44,13 @@ module.exports.fetchtabledata = function (req, res) {
 		}
 	})
 }
+
+module.exports.deltabledata = function (req, res) {
+	console.log(req.body);
+	db.deltone('todo',req.body._id,function(err){
+		if (err)
+			console.log(err);
+		else
+			help.respon(res,1)
+	})
+}
