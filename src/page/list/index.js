@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import FormBuild from '@src/components/FormBuild';
 import { observer } from "mobx-react";
 import { Link } from "react-router-dom";
-import { Table, Button } from 'antd';
+import { Table, Button, Modal } from 'antd';
 
 import Store from '../../stores/list';
 import './index.less';
@@ -12,6 +13,7 @@ import './index.less';
 		this.Store = new Store;
 	}
 	render() {
+	  console.log(this.Store.formProps)
 		return (
 				<div className="List-wrap">
 					<Table
@@ -25,6 +27,9 @@ import './index.less';
 							</Link>
 						</Button>
 					</div>
+					<Modal {...this.Store.ModalProps}>
+						<FormBuild formProps={this.Store.formProps} />
+					</Modal>
 				</div>
 		)
 	}

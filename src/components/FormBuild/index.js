@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Form, Input, Select, Button } from 'antd';
 import { Link } from 'react-router-dom';
+import {toJS} from "mobx";
 
 class FormBuild extends Component{
 	constructor(props) {
@@ -20,6 +21,7 @@ class FormBuild extends Component{
 			item.innerConfig.initialvalue = item.innerConfig.value;
 		}
 		delete item.innerConfig.value;
+		// console.log(item)
 		const rendertype = `render${type}`;
 		return this[rendertype](item);
 	};
@@ -74,7 +76,7 @@ class FormBuild extends Component{
 				{
 					items.map((item,index) => (
 						<Form.Item key={index} {...(item.itemLayout ? item.itemLayout : formProps.formLayout)} label={item.config.label}>
-							{getFieldDecorator( item.name, { rules: item.rules })(
+							{getFieldDecorator( item.name, { rules: item.rules, initialvalue: item.innerConfig.value})(
 									this.renderInner(item.type,item)
 							)}
 						</Form.Item>

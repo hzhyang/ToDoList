@@ -2,12 +2,85 @@ import React from 'react';
 import common from '@src/utils/common';
 
 export default {
+	formProps:{
+		onFieldsChange: null,
+		formLayout: {
+			labelCol: {
+				span:6
+			},
+			wrapperCol: {
+				span: 16
+			},
+		},
+		items: [
+			{
+				name: 'todo_name',
+				type: 'Input',
+				config: {
+					label: '代办名称',
+				},
+				innerConfig: {
+					value: 'qweqwe',
+					placeholder: '请输入代办名称'
+				},
+				rules: [
+					{ required: true, message: '请输入名称'}
+				]
+			},
+			{
+				name: 'todo_type',
+				type: 'Select',
+				config: {
+					label: '代办类型',
+				},
+				innerConfig: {},
+				options: [
+					{
+						value: 'important',
+						label: '重要的'
+					},
+					{
+						value: 'urgent',
+						label: '紧急的'
+					},
+					{
+						value: 'importanturgent',
+						label: '紧急且重要的'
+					},
+					{
+						value: 'general',
+						label: '一般的'
+					}
+				]
+			},
+			{
+				name: 'todo_remarks',
+				type: 'Textarea',
+				config: {
+					label: '代办备注',
+				},
+				innerConfig: {
+					placeholder: '请输入代办备注'
+				}
+			}
+		]
+	},
+	ModalProps:{
+		title: '修改',
+		visible: false
+	},
 	tableprops: {
 		pagination:{},
-		rowSelection:{
-			onChange: null
-		},
+		// rowSelection:{
+		// 	onChange: null
+		// },
 		columns:[
+			{
+				dataIndex: 'checkbox',
+				key: 'checkbox',
+				title: '标记',
+				width: 100
+			},
 			{
 				dataIndex: 'todo_name',
 				key: 'todo_name',
@@ -82,7 +155,7 @@ export default {
 				dataIndex: '',
 				key: 'operate',
 				title: '操作',
-				width:80,
+				width:180,
 
 			}
 		],

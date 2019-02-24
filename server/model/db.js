@@ -46,3 +46,10 @@ module.exports.deltone = function (collect,id,cb) {
     },cb)
   })
 }
+
+module.exports.findOne = function (collect,obj,cb) {
+  const whereobj = obj._id ? {_id: mongo.ObjectId(obj._id)} : obj.where
+  _connect(function (mydb) {
+    mydb.collection(collect).findOne(whereobj,cb)
+  })
+}

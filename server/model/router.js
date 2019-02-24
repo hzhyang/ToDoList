@@ -2,7 +2,7 @@ const db = require('./db.js');
 const help = require('./help')
 
 module.exports.todolist = function (req, res) {
-	console.log('hahha')
+	// console.log('hahha')
 	res.json({
 		test: 'hello'
 	})
@@ -25,32 +25,64 @@ module.exports.createlist = function (req, res) { // 添加
 }
 
 module.exports.fetchtabledata = function (req, res) {
-	console.log(req.query);
+	// console.log(req.query);
 	const { page,pageSize } = req.query;
 	let total = 0;
-	const limit = pageSize * 1;
-	const skip = page == 1 ? 0 : (page-1) * pageSize;
+	let current = page;
 	db.count('todo',{},function(resp) {
-		console.log(resp);
+		// console.log(resp);
 		total = resp
-	})
-	db.find('todo', {sort: { createdate: -1},limit,skip},function(err,resp) {
-		if (err) {
-			console.log(err)
-			help.respon(res);
+		const maxpage = Math.ceil(total/pageSize);
+		console.log(maxpage)
+		if (page < 1) {
+			current = 1
+		} else if(page > maxpage) {
+			current = maxpage
 		} else {
-			console.log(resp)
-			help.respon(res,1,{data:resp,total})
+			current = page
 		}
+		const limit = pageSize * 1;
+		const skip = current == 1 ? 0 : (current-1) * pageSize;
+		db.find('todo', {sort: { createdate: -1},limit,skip},function(err,resp) {
+			if (err) {
+				console.log(err)
+				help.respon(res);
+			} else {
+				// console.log(resp)
+				help.respon(res,1,{data:resp,total,current})
+			}
+		})
 	})
 }
 
 module.exports.deltabledata = function (req, res) {
-	console.log(req.body);
 	db.deltone('todo',req.body._id,function(err){
 		if (err)
 			console.log(err);
 		else
 			help.respon(res,1)
+	})
+}
+
+module.exports.checkedtabledata = function (req, res) {
+	db.findOne('todo',{_id: req.body._id},function (err,results) {
+		delete results._id;
+		const insertobj = Object.assign(results,{
+			checkdate: Date.now(),
+			isdone: true
+		})
+		db.insertOne('todo_checked',insertobj,function (err,results) {
+			if (err)
+				console.log(err)
+			else {
+				db.deltone('todo',req.body._id,function (err) {
+					if (err){
+						console.log(err)
+					} else {
+						help.respon(res,1)
+					}
+				})
+		  }
+		})
 	})
 }
