@@ -76,7 +76,7 @@ class FormBuild extends Component{
 				{
 					items.map((item,index) => (
 						<Form.Item key={index} {...(item.itemLayout ? item.itemLayout : formProps.formLayout)} label={item.config.label}>
-							{getFieldDecorator( item.name, { rules: item.rules, initialvalue: item.innerConfig.value})(
+							{getFieldDecorator( item.name, { rules: item.rules})(
 									this.renderInner(item.type,item)
 							)}
 						</Form.Item>
