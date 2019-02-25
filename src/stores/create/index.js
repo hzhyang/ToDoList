@@ -17,7 +17,7 @@ class Store {
 	/**@action
 	 * */
 	@action init = () => {
-		this.formProps.onChange = this.onFromChange;
+		this.formProps.onFieldsChange = this.onFromChange;
 		this.formProps.items.forEach(item => {
 			if (item.name === 'todo_submit') {
 				item.innerConfig.onClick = this.submitButton; // 添加按钮回调

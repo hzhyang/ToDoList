@@ -17,11 +17,7 @@ class FormBuild extends Component{
 	// })
 
 	renderInner = (type,item) => {
-		if (item.innerConfig.value) {
-			item.innerConfig.initialvalue = item.innerConfig.value;
-		}
-		delete item.innerConfig.value;
-		// console.log(item)
+		item.innerConfig.value && delete item.innerConfig.value;
 		const rendertype = `render${type}`;
 		return this[rendertype](item);
 	};
@@ -74,13 +70,15 @@ class FormBuild extends Component{
 		return (
 			<Form>
 				{
-					items.map((item,index) => (
-						<Form.Item key={index} {...(item.itemLayout ? item.itemLayout : formProps.formLayout)} label={item.config.label}>
-							{getFieldDecorator( item.name, { rules: item.rules})(
+					items.map((item,index) => {
+						return(
+							<Form.Item key={index} {...(item.itemLayout ? item.itemLayout : formProps.formLayout)} label={item.config.label}>
+								{getFieldDecorator( item.name, { rules: item.rules,initialValue: item.innerConfig.value})(
 									this.renderInner(item.type,item)
-							)}
-						</Form.Item>
-					))
+								)}
+							</Form.Item>
+						)
+					})
 				}
 			</Form>
 		);
