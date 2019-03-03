@@ -13,7 +13,6 @@ import './index.less';
 		this.Store = new Store;
 	}
 	render() {
-	  console.log(this.Store.formProps)
 		return (
 				<div className="List-wrap">
 					<Table

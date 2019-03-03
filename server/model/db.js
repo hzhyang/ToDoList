@@ -53,3 +53,11 @@ module.exports.findOne = function (collect,obj,cb) {
     mydb.collection(collect).findOne(whereobj,cb)
   })
 }
+
+module.exports.updateOne = function(collect,id,obj,cb) {
+  _connect(function( mydb){
+    mydb.collection(collect).updateOne({
+      _id: mongo.ObjectId(id)
+    },{$set: obj},cb);
+  })
+}

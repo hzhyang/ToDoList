@@ -1,7 +1,8 @@
 import React from 'react';
 import {observable, action, toJS} from "mobx";
-import CONTENTS from './contents';
+import CONTENTS from './constant';
 import ajax from '@src/utils/ajax';
+import {message} from "antd";
 
 export default class Store {
 	constructor() {
@@ -112,27 +113,51 @@ export default class Store {
 
 	@action tabeledit = (row) => {
 		this.ModalProps.title = `修改(${row.todo_name})`;
-		const _formProps = this.formProps;
-		_formProps.items.forEach( item => {
+		const _items = CONTENTS.formProps.items;
+		_items.forEach( item => {
 			item.innerConfig.value = row[item.name]
 		})
-		this.formProps = toJS(_formProps);
+		this.ModalProps._id = row._id;
 		this.ModalProps.visible = true;
+		this.formProps.items = _items;
 	}
 
 	@action handleOk = () => {
-
+		const data = {
+			_id: this.ModalProps._id
+		};
+		let flag = true;
+		this.formProps.items.forEach(item => {
+			data[item.name] = item.innerConfig.initialvalue;
+			if (item.name === 'todo_name' && (item.innerConfig.initialvalue == undefined || !item.innerConfig.initialvalue)) {
+					message.error('事件名称不能为空');
+					flag = false;
+				}
+		})
+		if (flag) {
+			ajax({
+				url: '/edittabledata',
+				type: 'post',
+				data
+			}).then(resp => {
+				if (resp.data.ok == 1) {
+					this.fetchTabledata(this.tableprops.pagination.current)
+					this.ModalProps.visible = false;
+				}
+			})
+		}
 	}
 	@action handleCancel = ()=> {
 		this.ModalProps.visible = false;
 	}
 
-	@action formChange = () => {
-    this.formProps.items.forEach(item => {
+	@action formChange = (fields) => {
+		const _items = CONTENTS.formProps.items;
+    _items.forEach(item => {
       if (item.name == fields.name) {
         item.innerConfig.value = fields.value;
-        console.log(item.innerConfig.value)
       }
     })
+		this.formProps.items = _items
 	}
 }

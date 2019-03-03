@@ -67,7 +67,11 @@ export default {
 	},
 	ModalProps:{
 		title: '修改',
-		visible: false
+		visible: false,
+		okText: "确认",
+		cancelText: "取消",
+		onOk: null,
+		destroyOnClose: true
 	},
 	tableprops: {
 		pagination:{},

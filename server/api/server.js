@@ -11,11 +11,11 @@ app.all("*", function (req, res, next) {
 	next();
 });
 
-app.get("/todolist",router.todolist);
 app.post("/createlist",router.createlist);
 app.get("/fetchtabledata",router.fetchtabledata);
 app.post('/deltabledata',router.deltabledata);
 app.post('/checkedtabledata',router.checkedtabledata);
+app.post('/edittabledata',router.edittabledata)
 
 app.listen(1888, function () {
 	console.log("start server success")

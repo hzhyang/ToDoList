@@ -1,12 +1,7 @@
 const db = require('./db.js');
 const help = require('./help')
 
-module.exports.todolist = function (req, res) {
-	// console.log('hahha')
-	res.json({
-		test: 'hello'
-	})
-}
+
 module.exports.createlist = function (req, res) { // 添加
 	if (Object.keys(req.body).length != 0) {
 		const time = Date.now();
@@ -84,5 +79,17 @@ module.exports.checkedtabledata = function (req, res) {
 				})
 		  }
 		})
+	})
+}
+
+module.exports.edittabledata = function (req, res) {
+	const id = req.body._id;
+	delete req.body._id;
+	db.updateOne('todo',id,req.body,function (err,results) {
+		if(err) {
+			console.log(err)
+		} else {
+			help.respon(res,1)
+		}
 	})
 }
