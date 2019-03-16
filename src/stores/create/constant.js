@@ -17,7 +17,7 @@ export default {
 					label: '代办名称',
 				},
 				innerConfig: {
-					value: '',
+					innervalue: '',
 					placeholder: '请输入代办名称'
 				},
 				rules: [

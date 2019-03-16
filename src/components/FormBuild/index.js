@@ -69,14 +69,11 @@ class FormBuild extends Component{
 			<Form>
 				{
 					items.map((item,index) => {
-						let initialValue = item.innerConfig.value;
-						item.innerConfig.initialvalue = initialValue;
-						const _item = JSON.parse(JSON.stringify(item));
-						delete _item.innerConfig.value;
+						let initialValue = item.innerConfig.innervalue;
 						return(
-							<Form.Item key={index} {...(_item.itemLayout ? _item.itemLayout : formProps.formLayout)} label={_item.config.label}>
-								{getFieldDecorator( _item.name, { rules: _item.rules,initialValue})(
-									this.renderInner(_item.type,_item)
+							<Form.Item key={index} {...(item.itemLayout ? item.itemLayout : formProps.formLayout)} label={item.config.label}>
+								{getFieldDecorator( item.name, { rules: item.rules,initialValue})(
+									this.renderInner(item.type,item)
 								)}
 							</Form.Item>
 						)

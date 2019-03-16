@@ -20,38 +20,29 @@ class Store {
 		this.formProps.onFieldsChange = this.onFromChange;
 		this.formProps.items.forEach(item => {
 			if (item.name === 'todo_submit') {
-				item.innerConfig.onClick = this.submitButton; // 添加按钮回调
+				item.innerConfig.onClick = this.submit; // 添加按钮回调
 			}
 		})
 	}
 
 	@action onFromChange = (fields) => {
-		console.log(fields)
 		this.formProps.items.forEach(item => {
 			if (item.name == fields.name) {
-				item.innerConfig.value = fields.value;
-				console.log(item.innerConfig.value)
+				item.innerConfig.innervalue = fields.value;
 			}
 		})
-		console.log(this.formProps)
 	}
 
-	@action submitButton = () => {
-		console.log(123)
+	@action submit = () => {
 		const data = {};
-		console.log(this.formProps.items)
 		this.formProps.items.forEach(item => {
 			if (item.name !== 'todo_submit') {
-				console.log(item)
-				data[item.name] = item.innerConfig.value;
+				data[item.name] = item.innerConfig.innervalue;
 			}
 		})
 		let flag = true;
-		console.log(data)
 		for (var item in data) {
-			console.log(data[item])
 			if (item == 'todo_name') {
-				console.log(item)
 				if (data[item] == undefined || !data[item]) {
 					message.error('事件名称不能为空');
 					flag = false;
