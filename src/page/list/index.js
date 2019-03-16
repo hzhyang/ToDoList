@@ -20,7 +20,7 @@ import './index.less';
 						{...this.Store.tableprops}
 					/>
 					<div className="addButton-wrap">
-						<Button type="primary">
+						<Button type="primary" shape="circle">
 							<Link to="create">
 								<i className="iconfont icon-tianjia1" />
 							</Link>

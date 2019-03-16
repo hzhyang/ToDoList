@@ -71,7 +71,7 @@ class FormBuild extends Component{
 					items.map((item,index) => {
 						let initialValue = item.innerConfig.value;
 						item.innerConfig.initialvalue = initialValue;
-						const _item = {...item};
+						const _item = JSON.parse(JSON.stringify(item));
 						delete _item.innerConfig.value;
 						return(
 							<Form.Item key={index} {...(_item.itemLayout ? _item.itemLayout : formProps.formLayout)} label={_item.config.label}>

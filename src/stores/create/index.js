@@ -26,22 +26,30 @@ class Store {
 	}
 
 	@action onFromChange = (fields) => {
+		console.log(fields)
 		this.formProps.items.forEach(item => {
 			if (item.name == fields.name) {
-				item.innerConfig.initialvalue = fields.value;
+				item.innerConfig.value = fields.value;
+				console.log(item.innerConfig.value)
 			}
 		})
+		console.log(this.formProps)
 	}
 
 	@action submitButton = () => {
+		console.log(123)
 		const data = {};
+		console.log(this.formProps.items)
 		this.formProps.items.forEach(item => {
 			if (item.name !== 'todo_submit') {
-				data[item.name] = item.innerConfig.initialvalue;
+				console.log(item)
+				data[item.name] = item.innerConfig.value;
 			}
 		})
 		let flag = true;
+		console.log(data)
 		for (var item in data) {
+			console.log(data[item])
 			if (item == 'todo_name') {
 				if (data[item] == undefined || !data[item]) {
 					message.error('事件名称不能为空');
