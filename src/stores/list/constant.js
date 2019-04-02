@@ -20,7 +20,7 @@ export default {
 					label: '代办名称',
 				},
 				innerConfig: {
-					value: 'qweqwe',
+					innervalue: '',
 					placeholder: '请输入代办名称'
 				},
 				rules: [
@@ -33,7 +33,9 @@ export default {
 				config: {
 					label: '代办类型',
 				},
-				innerConfig: {},
+				innerConfig: {
+					innervalue: ''
+				},
 				options: [
 					{
 						value: 'important',
@@ -60,6 +62,7 @@ export default {
 					label: '代办备注',
 				},
 				innerConfig: {
+					innervalue: '',
 					placeholder: '请输入代办备注'
 				}
 			}

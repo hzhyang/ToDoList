@@ -115,7 +115,7 @@ export default class Store {
 		this.ModalProps.title = `修改(${row.todo_name})`;
 		const _items = CONTENTS.formProps.items;
 		_items.forEach( item => {
-			item.innerConfig.value = row[item.name]
+			item.innerConfig.innervalue = row[item.name]
 		})
 		this.ModalProps._id = row._id;
 		this.ModalProps.visible = true;
@@ -128,8 +128,8 @@ export default class Store {
 		};
 		let flag = true;
 		this.formProps.items.forEach(item => {
-			data[item.name] = item.innerConfig.initialvalue;
-			if (item.name === 'todo_name' && (item.innerConfig.initialvalue == undefined || !item.innerConfig.initialvalue)) {
+			data[item.name] = item.innerConfig.innervalue;
+			if (item.name === 'todo_name' && (item.innerConfig.innervalue == undefined || !item.innerConfig.innervalue)) {
 					message.error('事件名称不能为空');
 					flag = false;
 				}
@@ -155,7 +155,7 @@ export default class Store {
 		const _items = CONTENTS.formProps.items;
     _items.forEach(item => {
       if (item.name == fields.name) {
-        item.innerConfig.value = fields.value;
+        item.innerConfig.innervalue = fields.value;
       }
     })
 		this.formProps.items = _items
